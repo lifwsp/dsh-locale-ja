@@ -1,18 +1,26 @@
 import type { Context as ClientContext } from "@deepseek-ai/cordis";
+import { provideBetterLocale } from "./better-locale.ts";
 import { DICTS } from "./dictionaries.ts";
 import { EXTENSION_DICTS } from "./extension-dictionaries.ts";
 import { createFontStylesheet } from "./font.ts";
 import { extendLocaleService, isJapaneseActive, JA } from "./locale-extension.ts";
+import { SIDEBAR_JA, SIDEBAR_NS } from "./sidebar-dictionary.ts";
 
 export const inject = ["locale"];
 
 export function apply(ctx: ClientContext): void {
   const { locale } = ctx;
 
+  // Published first so a consumer that re-reads it on the next locale
+  // revision bump (the registrations below) already finds it.
+  ctx.effect(() => provideBetterLocale(ctx), "locale-ja: betterLocale store");
+
   ctx.effect(() => {
-    const disposers = [...Object.entries(DICTS), ...Object.entries(EXTENSION_DICTS)].map(
-      ([ns, dict]) => locale.register(ns, JA, dict),
-    );
+    const disposers = [
+      ...Object.entries(DICTS),
+      ...Object.entries(EXTENSION_DICTS),
+      [SIDEBAR_NS, SIDEBAR_JA] as const,
+    ].map(([ns, dict]) => locale.register(ns, JA, dict));
     return () => {
       for (const dispose of disposers) dispose();
     };

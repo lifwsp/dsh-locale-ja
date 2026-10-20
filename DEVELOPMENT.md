@@ -264,6 +264,14 @@ its working directory set to the profile directory. Remove the local package
 dsh plugin --profile web remove @fang2hou/dsh-locale-ja
 ```
 
+### Trying a build in an installed profile (desktop app)
+
+For a profile that already has the published package (for example the DSH
+Tauri desktop app), a build can be tried without publishing: run `pnpm build`,
+back up the profile's `node_modules/@fang2hou/dsh-locale-ja/lib/`, and replace
+it with this repository's `lib/`. Restart the app so the new bundle loads.
+Reinstalling the package overwrites the replacement.
+
 ## Coding standards
 
 - **Code language is English.** Identifiers, comments, and configuration are

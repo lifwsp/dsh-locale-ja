@@ -13,7 +13,8 @@ DeepSeek Harness（DSH）の Web UI に **日本語** を追加するプラグ�
 DSH 標準の **中文**・**English** に加えて、表示言語として **日本語** を選択できるようにします。
 
 - 57 の名前空間にわたる 2,603 件の UI 文字列を日本語化します。未翻訳の項目は英語で表示されます。
-- サードパーティ・プラグインの文字列も日本語化します（billion-context、dshmarket、dsh-rewind-plugin、dsh-plugin-subscriptions、dsh-tauri 系の 12 パッケージ）。これらは DSH の型付き名前空間の外にあるため、`pnpm typecheck` ではキーのずれを検出できません。プラグイン側がキーを追加した場合、そのキーは英語で表示されます。
+- サードパーティ・プラグインの文字列も日本語化します（billion-context、dshmarket、dsh-rewind-plugin、dsh-plugin-subscriptions、dsh-tauri 系の 12 パッケージ）と dsh-better-sidebar（サイドバー）。これらは DSH の型付き名前空間の外にあるため、`pnpm typecheck` ではキーのずれを検出できません。プラグイン側がキーを追加した場合、そのキーは英語で表示されます。
+- dsh-better-sidebar は独自の `t()` で文言を決めるため、ロケールサービスへの登録だけでは日本語になりません。このプラグインが、サイドバーが参照する `betterLocale` ストアを公開して日本語を渡します（他のプラグインが同名のストアを公開している場合は何もしません）。詳しくは [ADR-0007](./docs/adr/0007-serve-better-sidebar-through-the-betterlocale-store.md) を参照してください。
 - 日本語の表示中は OS 標準の日本語システムフォントを適用します。外部の Web フォントは読み込みません。
 - 選択した言語は DSH ホストの設定に保存され、ページを再読み込みしても維持されます。同じ DSH ホストに接続する別のブラウザーにも反映されます。
 

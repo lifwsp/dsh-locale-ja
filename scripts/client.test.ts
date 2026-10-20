@@ -11,7 +11,7 @@ const { name: PACKAGE_ID } = JSON.parse(readFileSync(resolve(root, "package.json
 };
 const bundle = readFileSync(resolve(root, "lib/client.js"), "utf8");
 
-const NAMESPACE_COUNT = 73;
+const NAMESPACE_COUNT = 74;
 
 let failures = 0;
 
@@ -55,6 +55,14 @@ interface LoaderEntry {
 interface ContextStub {
   locale: LocaleStandIn;
   effect(fn: () => () => void, description?: string): void;
+  get(name: string): unknown;
+  provide(name: string, value?: unknown): () => void;
+}
+
+interface BetterLocaleFace {
+  active: string | undefined;
+  getOverride(dshActive: string, ns: string, key: string): string | undefined;
+  isOverrideActive(dshActive: string): boolean;
 }
 
 // Minimal `document` covering the plugin's stylesheet ownership.
@@ -275,10 +283,17 @@ assert(typeof plugin.apply === "function", "exports apply()");
 console.log("activation");
 let locale = createLocale();
 let disposers: Array<() => void> = [];
+const services = new Map<string, unknown>();
 const ctxOf = (service: LocaleStandIn): ContextStub => ({
   locale: service,
   effect(fn, _description) {
     disposers.push(fn());
+  },
+  get: (name) => services.get(name),
+  provide(name, value) {
+    if (services.has(name)) throw new Error(`service "${name}" is already provided`);
+    services.set(name, value);
+    return () => services.delete(name);
   },
 });
 
@@ -298,6 +313,32 @@ assert(
 );
 assert(locale.getLocale().revision > 0, "publishes a fresh snapshot so mounted selectors refresh");
 assert(dom.tags.length === 0, "inserts no stylesheet while en is active");
+
+// --- dsh-better-sidebar seam ----------------------------------------------
+
+console.log("betterLocale store");
+const store = services.get("betterLocale") as BetterLocaleFace | undefined;
+assert(store !== undefined, "publishes the betterLocale store");
+assert(
+  japanese.some((entry) => entry.ns === "betterSidebar"),
+  "registers the betterSidebar namespace",
+);
+assert(
+  store?.getOverride("ja", "betterSidebar", "files") === "ファイル",
+  "serves sidebar copy while Japanese is active",
+);
+assert(
+  store?.getOverride("en", "betterSidebar", "files") === undefined &&
+    store?.getOverride("zh", "betterSidebar", "files") === undefined &&
+    store?.isOverrideActive("en") === false &&
+    store?.isOverrideActive("ja") === true,
+  "stays inert for the shipped locales",
+);
+assert(
+  store?.getOverride("ja", "other", "files") === undefined &&
+    store?.getOverride("ja", "betterSidebar", "noSuchKey") === undefined,
+  "ignores other namespaces and unknown keys",
+);
 
 // --- switching to Japanese ----------------------------------------------
 
@@ -356,6 +397,7 @@ assert(
   "falls back to English when removed while Japanese is active",
 );
 assert(locale.registrations.length === 0, "disposes every dictionary registration");
+assert(services.has("betterLocale") === false, "withdraws the betterLocale store");
 assert(dom.tags.length === 0, "removes the stylesheet");
 
 let restored = false;
@@ -375,8 +417,14 @@ console.log("restoring a persisted selection");
 locale = createLocale("ja");
 assert(locale.getLocale().active === "en", "boots on a fallback before the language exists");
 disposers = [];
+// A store another plugin already owns must not make activation throw.
+services.set("betterLocale", { owner: "other" });
 plugin.apply(ctxOf(locale));
 assert(locale.getLocale().active === "ja", "boots straight into Japanese");
+assert(
+  (services.get("betterLocale") as { owner?: string }).owner === "other",
+  "leaves a betterLocale store owned by another plugin untouched",
+);
 for (const dispose of disposers.toReversed()) dispose();
 
 if (failures > 0) {
