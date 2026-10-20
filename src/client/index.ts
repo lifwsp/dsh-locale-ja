@@ -1,5 +1,6 @@
 import type { Context as ClientContext } from "@deepseek-ai/cordis";
 import { DICTS } from "./dictionaries.ts";
+import { EXTENSION_DICTS } from "./extension-dictionaries.ts";
 import { createFontStylesheet } from "./font.ts";
 import { extendLocaleService, isJapaneseActive, JA } from "./locale-extension.ts";
 
@@ -9,7 +10,9 @@ export function apply(ctx: ClientContext): void {
   const { locale } = ctx;
 
   ctx.effect(() => {
-    const disposers = Object.entries(DICTS).map(([ns, dict]) => locale.register(ns, JA, dict));
+    const disposers = [...Object.entries(DICTS), ...Object.entries(EXTENSION_DICTS)].map(
+      ([ns, dict]) => locale.register(ns, JA, dict),
+    );
     return () => {
       for (const dispose of disposers) dispose();
     };
