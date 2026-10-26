@@ -3,7 +3,7 @@
 This document describes how to develop, validate, and release
 `dsh-locale-ja`.
 
-The project is pre-release (`0.4.0`) and supports the DSH `0.2.1-rc.2` `web`
+The project is pre-release (`0.4.0`) and supports the DSH `0.2.1-rc.3` `web`
 profile and browser UI only. The `0.1.0` on npm is the older, dynamically
 loaded artifact; the standard package ships from `0.2.0`.
 
@@ -148,7 +148,7 @@ review those against the shipped source strings and their UI call sites.
 
 `mise run e2e` (`e2e/run-e2e.ts`):
 1. builds the plugin tarball from the current source (`pnpm pack`),
-2. builds a Docker image pinning `@deepseek-ai/dsh@0.2.1-rc.2`
+2. builds a Docker image pinning `@deepseek-ai/dsh@0.2.1-rc.3`
    (`e2e/Dockerfile`),
 3. starts `dsh web` in a container with a throwaway in-container `$DSH_HOME`
    (booting with `--no-open`; readiness is any HTTP response, since the
@@ -192,7 +192,7 @@ The DSH under test defaults to the pinned version above; override it with
 
 ```bash
 mise run e2e-next                   # next @deepseek-ai/dsh
-DSH_E2E_DSH_VERSION=0.2.1-rc.2 mise run e2e   # an exact upcoming version
+DSH_E2E_DSH_VERSION=0.2.1-rc.3 mise run e2e   # an exact upcoming version
 ```
 
 ## Local dev environment (Docker + hot reload)
