@@ -302,9 +302,14 @@ plugin.apply(ctxOf(locale));
 const japanese = locale.registrations.filter((entry) => entry.id === "ja");
 assert(japanese.length === NAMESPACE_COUNT, `registers ${NAMESPACE_COUNT} namespaces for ja`);
 assert(
-  ["common", "conversation", "trajectory", "workspace", "permission.access"].every((ns) =>
-    japanese.some((entry) => entry.ns === ns),
-  ),
+  [
+    "common",
+    "conversation",
+    "entryCustomization",
+    "trajectory",
+    "workspace",
+    "permission.access",
+  ].every((ns) => japanese.some((entry) => entry.ns === ns)),
   "covers the namespaces owned by different packages",
 );
 assert(

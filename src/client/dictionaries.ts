@@ -28,6 +28,8 @@ import type {} from "@deepseek-ai/dsh-client-ui-goal/client";
 import type {} from "@deepseek-ai/dsh-client-ui-input-trigger/client";
 // job
 import type {} from "@deepseek-ai/dsh-client-ui-jobs/client";
+// entryCustomization
+import type {} from "@deepseek-ai/dsh-client-ui-entry-customization/client";
 // feedback
 import type {} from "@deepseek-ai/dsh-client-ui-message-feedback/client";
 // model
@@ -58,8 +60,6 @@ import type {} from "@deepseek-ai/dsh-client-ui-sidebar-documentpreview/client";
 import type {} from "@deepseek-ai/dsh-client-ui-sidebar-files/client";
 // sidebarRight
 import type {} from "@deepseek-ai/dsh-client-ui-sidebar-right/client";
-// entryCustomization
-import type {} from "@deepseek-ai/dsh-client-ui-entry-customization/client";
 // skill
 import type {} from "@deepseek-ai/dsh-client-ui-skill/client";
 // subagent
@@ -97,7 +97,7 @@ import type {} from "@deepseek-ai/dsh-client-ui-sidebar-browser/client";
 // The namespaces below ship no key union through their `exports`; each key
 // set is copied from the named package, and `pnpm drift` is the only check
 // that sees their upstream drift.
-/** Keys of @deepseek-ai/dsh-client-ui-trajectory@0.2.1-rc.3 (union lives in a declaration the package's `exports` never exposes). */
+/** Keys of @deepseek-ai/dsh-client-ui-trajectory@0.2.1-rc.4 (union lives in a declaration the package's `exports` never exposes). */
 type TrajectoryKey =
   | "view.trajectory"
   | "toolbar.aria"
@@ -292,7 +292,7 @@ type TrajectoryKey =
   | "code.source"
   | "record.wrapLines";
 
-/** Keys of @deepseek-ai/dsh-client-ui-directory-picker-browse@0.2.1-rc.3 (registers through the untyped overload, no namespace merge). */
+/** Keys of @deepseek-ai/dsh-client-ui-directory-picker-browse@0.2.1-rc.4 (registers through the untyped overload, no namespace merge). */
 type DirectoryBrowserKey =
   | "browser.title"
   | "browser.home"
@@ -308,7 +308,7 @@ type DirectoryBrowserKey =
   | "browser.truncated"
   | "browser.showHidden";
 
-/** Keys of @deepseek-ai/dsh-client-ui-permission-presets@0.2.1-rc.3 (registers through the untyped overload). */
+/** Keys of @deepseek-ai/dsh-client-ui-permission-presets@0.2.1-rc.4 (registers through the untyped overload). */
 type PermissionAccessKey =
   | "mode"
   | "close"
@@ -328,13 +328,13 @@ type PermissionAccessKey =
   | "auto.confirm.acknowledge"
   | "auto.confirm.enable";
 
-/** Keys of @deepseek-ai/dsh-client-ui-sidebar-documentpreview@0.2.1-rc.3 (registers through the untyped overload). */
+/** Keys of @deepseek-ai/dsh-client-ui-sidebar-documentpreview@0.2.1-rc.4 (registers through the untyped overload). */
 type DocumentHtmlKey = "title" | "frame" | "loading" | "failed";
 
-/** Keys of @deepseek-ai/dsh-client-ui-sidebar-documentpreview@0.2.1-rc.3 (registers through the untyped overload). */
+/** Keys of @deepseek-ai/dsh-client-ui-sidebar-documentpreview@0.2.1-rc.4 (registers through the untyped overload). */
 type DocumentMarkdownKey = "viewer.label" | "code.copy" | "code.copied" | "footnotes";
 
-/** Keys of @deepseek-ai/dsh-client-ui-reference@0.2.1-rc.3 (registers through the untyped overload). */
+/** Keys of @deepseek-ai/dsh-client-ui-reference@0.2.1-rc.4 (registers through the untyped overload). */
 type ReferenceKey =
   | "section.files"
   | "section.subagents"
@@ -352,10 +352,10 @@ type ReferenceKey =
   | "fileOpen.retry"
   | "fileOpen.close";
 
-/** Keys of @deepseek-ai/dsh-client-ui-sidebar-documentpreview@0.2.1-rc.3 (registers through the untyped overload). */
+/** Keys of @deepseek-ai/dsh-client-ui-sidebar-documentpreview@0.2.1-rc.4 (registers through the untyped overload). */
 type SidebarCodePreviewKey = "title" | "copy" | "copied";
 
-/** Keys of @deepseek-ai/dsh-client-ui-sidebar-documentpreview@0.2.1-rc.3 (registers through the untyped overload). */
+/** Keys of @deepseek-ai/dsh-client-ui-sidebar-documentpreview@0.2.1-rc.4 (registers through the untyped overload). */
 type SidebarImageKey =
   | "title"
   | "preview"
@@ -369,7 +369,7 @@ type SidebarImageKey =
   | "zoomFitWidth"
   | "zoomValue";
 
-/** Keys of @deepseek-ai/dsh-client-ui-sidebar-documentpreview@0.2.1-rc.3 (registers through the untyped overload). */
+/** Keys of @deepseek-ai/dsh-client-ui-sidebar-documentpreview@0.2.1-rc.4 (registers through the untyped overload). */
 type SidebarPdfKey =
   | "title"
   | "pageImage"
@@ -387,7 +387,7 @@ type SidebarPdfKey =
   | "zoomFitWidth"
   | "zoomValue";
 
-/** Keys of @deepseek-ai/dsh-client-ui-sidebar-terminal@0.2.1-rc.3 (registers through the untyped overload). */
+/** Keys of @deepseek-ai/dsh-client-ui-sidebar-terminal@0.2.1-rc.4 (registers through the untyped overload). */
 type SidebarTerminalKey =
   | "shortcut.noSession"
   | "recoveryFailed"
@@ -418,7 +418,7 @@ type SidebarTerminalKey =
   | "invalidOutput"
   | "terminalLimit";
 
-/** Keys of @deepseek-ai/dsh-client-ui-sidebar-documentpreview@0.2.1-rc.3 (registers through the untyped overload). */
+/** Keys of @deepseek-ai/dsh-client-ui-sidebar-documentpreview@0.2.1-rc.4 (registers through the untyped overload). */
 type SidebarExcelKey =
   | "title"
   | "language"
@@ -436,7 +436,7 @@ type SidebarExcelKey =
   | "featureSeparator"
   | "retry";
 
-/** Keys of @deepseek-ai/dsh-client-ui-sidebar-documentpreview@0.2.1-rc.3 (registers through the untyped overload). */
+/** Keys of @deepseek-ai/dsh-client-ui-sidebar-documentpreview@0.2.1-rc.4 (registers through the untyped overload). */
 type SidebarOfficeKey =
   | "title"
   | "loading"
@@ -736,6 +736,7 @@ const common: LocaleDictOf<"common"> = {
 };
 
 const conversation: LocaleDictOf<"conversation"> = {
+  "session.moreViews": "その他の会話ビュー",
   "shortcut.newline": "改行",
   "shortcut.complementary": "キュー追加 / 割り込み送信のもう一方の動作を実行",
   "shortcut.slash": "コマンドメニューを開く",
@@ -814,8 +815,6 @@ const conversation: LocaleDictOf<"conversation"> = {
   "hero.preview": "プレビュー",
   "hero.chooseWorkspace": "ワークスペースを選択",
   "session.hierarchy": "セッション階層",
-  "session.moreViews": "その他の会話ビュー",
-  "session.moreViewsCurrent": "その他の会話ビュー · {name}",
   "todo.title": "タスク",
   "todo.progress.done": "{done} 完了",
   "todo.progress.active": "{active} 進行中",
@@ -1274,6 +1273,14 @@ const documentMarkdown: Record<DocumentMarkdownKey, string> = {
   "code.copy": "コピー",
   "code.copied": "コピーしました",
   footnotes: "脚注",
+};
+
+const entryCustomization: LocaleDictOf<"entryCustomization"> = {
+  install: "他のプラグインを探す",
+  create: "プラグインを作成",
+  "createPrompt.sidebar": "左サイドバーに項目を追加する DSH プラグインを作成してください。",
+  "createPrompt.conversation": "DSH の会話ビュー用プラグインを作成してください。",
+  "createPrompt.rightbar": "右サイドバーに項目を追加する DSH プラグインを作成してください。",
 };
 
 const feedback: LocaleDictOf<"feedback"> = {
@@ -2485,12 +2492,12 @@ const shortcutsLayout: LocaleDictOf<"shortcuts.layout"> = {
 };
 
 const sidebar: LocaleDictOf<"sidebar"> = {
+  "panels.more": "その他",
   "session.new": "新規セッション",
   "session.new.label": "新規セッションを作成",
   "toggle.open": "サイドバーを開く",
   "toggle.collapse": "サイドバーを折りたたむ",
   "panels.label": "グローバルパネル",
-  "panels.more": "その他",
 };
 
 const sidebarCodePreview: Record<SidebarCodePreviewKey, string> = {
@@ -2656,6 +2663,7 @@ const sidebarOffice: Record<SidebarOfficeKey, string> = {
 };
 
 const sidebarRight: LocaleDictOf<"sidebarRight"> = {
+  "tab.guide.more": "その他のツール",
   "command.close": "現在のページまたはウィンドウを閉じる",
   "command.refresh": "現在のページを再読み込み",
   "command.noRefresh": "このページは再読み込みできません",
@@ -2689,7 +2697,6 @@ const sidebarRight: LocaleDictOf<"sidebarRight"> = {
   "dock.drop.top": "上に分割して追加",
   "dock.drop.bottom": "下に分割して追加",
   "tab.guide.title": "はじめる",
-  "tab.guide.more": "その他のツール",
   "tab.unavailable": "この種類のコンテンツを表示できるビューはまだありません。",
 };
 
@@ -3137,14 +3144,6 @@ const workspace: LocaleDictOf<"workspace"> = {
   "time.years": "{n}年",
   "time.ago": "{t}前",
 };
-const entryCustomization: LocaleDictOf<"entryCustomization"> = {
-  install: "ほかのプラグインを探す",
-  create: "プラグインを作成",
-  "createPrompt.sidebar": "左サイドバーに入口を持つ DSH プラグインを作成してください。",
-  "createPrompt.conversation": "DSH の会話ビュープラグインを作成してください。",
-  "createPrompt.rightbar": "右サイドバーに入口を持つ DSH プラグインを作成してください。",
-};
-
 const deepseekModelLabel1017: LocaleDictOf<"deepseek-model-label-1017"> = {
   "badge.label": "1017",
 };
@@ -3434,10 +3433,10 @@ export const DICTS: Record<string, Record<string, string>> = {
   conversation: conversation,
   cordis: cordis,
   deliverables: deliverables,
-  entryCustomization: entryCustomization,
   "directory-browser": directoryBrowser,
   documentHtml: documentHtml,
   documentMarkdown: documentMarkdown,
+  entryCustomization: entryCustomization,
   feedback: feedback,
   goal: goal,
   job: job,
